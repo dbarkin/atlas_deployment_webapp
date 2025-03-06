@@ -105,64 +105,36 @@ This document outlines the functional, non-functional, and security requirements
 ---
 
 ## 5. High-Level Architecture Diagram
-
+<pre style="font-family: 'Courier New', monospace;">
 +----------------------+
-
 | Next.js (Vercel/GCP) |
-
-| - NextAuth.js       |
-
-| - Google OAuth      |
-
-| - HTTPS API Calls   |
-
+| - NextAuth.js       |
+| - Google OAuth      |
+| - HTTPS API Calls   |
 +----------------------+
-
-           |
-
-           v
-
-+----------------------+       +----------------------+
-
-| GCP API Gateway      |<----->| FastAPI (Cloud Run)  |
-
-| - Rate Limiting      |       | - Token Validation   |
-
-| - Authentication     |       | - RBAC Enforcement   |
-
-+----------------------+       | - GitHub API Trigger |
-
-           |                   +----------------------+
-
-           v                          |
-
-+----------------------+              v
-
-| GitHub Actions       |<----Terraform State (GCS)----
-
-| - Terraform Scripts  |                               |
-
-| - Manual Approval    |                               |
-
-| - Structured Logs    |                               |
-
-+----------------------+                               |
-
-          |                                            |
-
-          v                                            v
-
-+----------------------+                    +-----------------------+
-
-| MongoDB Atlas        |                    | ELK/Prometheus        |
-
-| - Multi-Region/AZ    |                    | - Logs (Elasticsearch)|
-
-| - 7-Day Backups      |                    | - Metrics (Grafana)   |
-
-+----------------------+                    +-----------------------+
-
----
+           |
+           v
++----------------------+       +----------------------+
+| GCP API Gateway      |<----->| FastAPI (Cloud Run)  |
+| - Rate Limiting      |       | - Token Validation   |
+| - Authentication     |       | - RBAC Enforcement   |
++----------------------+       | - GitHub API Trigger |
+           |                   +----------------------+
+           v                          |
++----------------------+              v
+| GitHub Actions       |<----Terraform State (GCS)----
+| - Terraform Scripts  |                               |
+| - Manual Approval    |                               |
+| - Structured Logs    |                               |
++----------------------+                               |
+          |                                            |
+          v                                            v
++----------------------+                    +-----------------------+
+| MongoDB Atlas        |                    | ELK/Prometheus        |
+| - Multi-Region/AZ    |                    | - Logs (Elasticsearch)|
+| - 7-Day Backups      |                    | - Metrics (Grafana)   |
++----------------------+                    +-----------------------+
+</pre>---
 
 ## 6. Security Considerations
 
